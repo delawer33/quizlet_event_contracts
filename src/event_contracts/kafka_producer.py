@@ -5,6 +5,13 @@ from confluent_kafka import Producer
 logger = logging.getLogger(__name__)
 
 
+def delivery_report(err, msg):
+    if err:
+        logger.error(f"Message delivery failed: {err}")
+    else:
+        logger.info(f"Message delivered: topic={msg.topic()} key={msg.key()}")
+
+
 class KafkaProducer:
     def __init__(self, servers: str):
         self.producer = Producer(
@@ -25,8 +32,8 @@ class KafkaProducer:
                 topic=topic,
                 key=key,
                 value=value,
+                on_delivery=delivery_report,
             )
-            self.producer.flush()
-            logger.info("Message delivered")
+            self.producer.poll(0)
         except Exception as e:
             logger.error(f"Failed to send message: {e}")
