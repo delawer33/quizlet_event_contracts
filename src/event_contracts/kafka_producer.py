@@ -10,6 +10,11 @@ class KafkaProducer:
         self.producer = Producer(
             {
                 "bootstrap.servers": servers,
+                "delivery.timeout.ms": 3000,
+                "request.timeout.ms": 1000,
+                "retries": 2,
+                "queue.buffering.max.messages": 100000,
+                "queue.buffering.max.kbytes": 10240,
                 "acks": "all",
             }
         )
@@ -22,5 +27,6 @@ class KafkaProducer:
                 value=value,
             )
             self.producer.flush()
+            logger.info("Message delivered")
         except Exception as e:
             logger.error(f"Failed to send message: {e}")
