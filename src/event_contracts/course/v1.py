@@ -10,6 +10,7 @@ class CourseCreated(BaseModel):
 
 
 class CourseEnrolled(BaseModel):
+    enrollment_id: int
     course_id: int
     user_id: int
     enrolled_at: datetime
