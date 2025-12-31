@@ -1,6 +1,12 @@
 from datetime import datetime
+from enum import StrEnum
 
 from pydantic import BaseModel
+
+
+class LearningEventType(StrEnum):
+    LEARNING_SESSION_STARTED = "learning_session_started"
+    LEARNING_SESSION_FINISHED = "learning_session_finished"
 
 
 class LearningSessionStarted(BaseModel):

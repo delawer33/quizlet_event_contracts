@@ -1,6 +1,13 @@
 from datetime import datetime
+from enum import StrEnum
 
 from pydantic import BaseModel
+
+
+class CourseEventType(StrEnum):
+    COURSE_CREATED = "course_created"
+    COURSE_ENROLLED = "course_enrolled"
+    COURSE_PROGRESS_UPDATED = "course_progress_updated"
 
 
 class CourseCreated(BaseModel):

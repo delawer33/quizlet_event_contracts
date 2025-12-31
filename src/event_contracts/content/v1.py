@@ -1,6 +1,12 @@
 from datetime import datetime
+from enum import StrEnum
 
 from pydantic import BaseModel
+
+
+class ContentEventType(StrEnum):
+    DECK_CREATED = "deck_created"
+    CARD_CREATED = "card_created"
 
 
 class DeckCreated(BaseModel):
